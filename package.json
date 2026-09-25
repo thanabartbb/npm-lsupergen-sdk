@@ -9,13 +9,13 @@
     "client",
     "typescript"
   ],
-  "homepage": "https://github.com/thanabartbb/npm-lsupagen-sdk#readme",
+  "homepage": "https://github.com/thanabartbb/npm-lsupergen-sdk#readme",
   "bugs": {
-    "url": "https://github.com/thanabartbb/npm-lsupagen-sdk/issues"
+    "url": "https://github.com/thanabartbb/npm-lsupergen-sdk/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thanabartbb/npm-lsupagen-sdk.git"
+    "url": "git+https://github.com/thanabartbb/npm-lsupergen-sdk.git"
   },
   "license": "MIT",
   "author": "thanabartbb",
