@@ -116,6 +116,33 @@ describe('Lsupergen', () => {
   });
 });
 
+describe('fetch binding', () => {
+  // Mimics browsers and Cloudflare Workers, which reject fetch called with a foreign `this`.
+  const strictFetch = vi.fn(function (this: unknown) {
+    if (this !== globalThis) throw new TypeError('Illegal invocation');
+    return Promise.resolve(jsonResponse({ ok: true }));
+  }) as unknown as typeof fetch;
+
+  it('calls the global fetch with the global object as `this`', async () => {
+    vi.stubGlobal('fetch', strictFetch);
+    try {
+      const client = new Lsupergen({
+        apiKey: 'test-key',
+        baseURL: 'https://example.test',
+        maxRetries: 0,
+      });
+      await expect(client.get('/health')).resolves.toEqual({ ok: true });
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('calls a user-supplied platform fetch with the global object as `this`', async () => {
+    const client = createClient(strictFetch, { maxRetries: 0 });
+    await expect(client.get('/health')).resolves.toEqual({ ok: true });
+  });
+});
+
 describe('VERSION', () => {
   it('matches package.json', () => {
     const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
