@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-09-25
+
+### Fixed
+
+- Calling the client in browsers, Cloudflare Workers and Deno no longer fails with
+  `ConnectionError` (cause: `TypeError: Illegal invocation`). The stored `fetch` is now always
+  invoked with the global object as `this`. Workaround for 0.1.0: pass
+  `fetch: (...args) => fetch(...args)`.
+
 ## [0.1.0] - 2026-09-25
 
 ### Added

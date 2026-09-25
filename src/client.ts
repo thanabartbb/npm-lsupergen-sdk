@@ -42,10 +42,13 @@ export class Lsupergen {
     this.timeout = options.timeout ?? DEFAULT_TIMEOUT;
     this.maxRetries = options.maxRetries ?? DEFAULT_MAX_RETRIES;
     this.defaultHeaders = options.defaultHeaders ?? {};
-    this.fetchImpl = options.fetch ?? globalThis.fetch;
-    if (!this.fetchImpl) {
+    const fetchImpl = options.fetch ?? globalThis.fetch;
+    if (!fetchImpl) {
       throw new LsupergenError('No `fetch` implementation found. Use Node.js 18+ or pass `fetch`.');
     }
+    // Browsers and Cloudflare Workers throw "Illegal invocation" when fetch is called with a
+    // `this` other than the global object, so never call it as a method of the client.
+    this.fetchImpl = (input, init) => fetchImpl.call(globalThis, input, init);
   }
 
   get<T = unknown>(path: string, options?: RequestOptions): Promise<T> {
