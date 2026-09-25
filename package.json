@@ -1,0 +1,78 @@
+{
+  "name": "lsupagen-sdk",
+  "version": "0.1.0",
+  "description": "Official TypeScript/JavaScript SDK for the Lsupagen API",
+  "keywords": [
+    "lsupagen",
+    "sdk",
+    "api",
+    "client",
+    "typescript"
+  ],
+  "homepage": "https://github.com/thanabartbb/npm-lsupagen-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/thanabartbb/npm-lsupagen-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thanabartbb/npm-lsupagen-sdk.git"
+  },
+  "license": "MIT",
+  "author": "thanabartbb",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "check:exports": "attw --pack . && publint",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.2",
+    "eslint": "^10.11.0",
+    "prettier": "^3.9.9",
+    "publint": "^0.3.24",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.70.1",
+    "vitest": "^5.0.2"
+  }
+}

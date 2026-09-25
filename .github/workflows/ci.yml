@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run check:exports
+
+  # Dev tooling needs Node 22+, but the published package supports Node 18+.
+  runtime-compat:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci && npm run build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Load CJS build
+        run: |
+          node -e "const { Lsupagen } = require('./dist/index.cjs'); new Lsupagen({ apiKey: 'x' });"
+      - name: Load ESM build
+        run: |
+          node --input-type=module -e "import { Lsupagen } from './dist/index.js'; new Lsupagen({ apiKey: 'x' });"
