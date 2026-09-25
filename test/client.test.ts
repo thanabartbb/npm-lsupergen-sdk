@@ -32,6 +32,16 @@ describe('Lsupergen', () => {
     vi.unstubAllEnvs();
   });
 
+  it('defaults baseURL to https://agents-sdk.space/v1', () => {
+    const saved = process.env.LSUPERGEN_BASE_URL;
+    delete process.env.LSUPERGEN_BASE_URL;
+    try {
+      expect(new Lsupergen({ apiKey: 'k' }).baseURL).toBe('https://agents-sdk.space/v1');
+    } finally {
+      if (saved !== undefined) process.env.LSUPERGEN_BASE_URL = saved;
+    }
+  });
+
   it('reads the API key from the environment', () => {
     vi.stubEnv('LSUPERGEN_API_KEY', 'env-key');
     expect(new Lsupergen().apiKey).toBe('env-key');
