@@ -2,7 +2,7 @@ import { APIError, ConnectionError, LsupergenError, TimeoutError } from './error
 import type { ClientOptions, HttpMethod, QueryValue, RequestOptions } from './types.js';
 import { VERSION } from './version.js';
 
-const DEFAULT_BASE_URL = 'https://api.lsupergen.com';
+const DEFAULT_BASE_URL = 'https://agents-sdk.space/v1';
 const DEFAULT_TIMEOUT = 60_000;
 const DEFAULT_MAX_RETRIES = 2;
 

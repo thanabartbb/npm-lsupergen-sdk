@@ -42,14 +42,14 @@ const { Lsupergen } = require('lsupergen-sdk');
 
 ## Configuration
 
-| Option           | Type                     | Default                                                         |
-| ---------------- | ------------------------ | --------------------------------------------------------------- |
-| `apiKey`         | `string`                 | `process.env.LSUPERGEN_API_KEY`                                 |
-| `baseURL`        | `string`                 | `process.env.LSUPERGEN_BASE_URL` or `https://api.lsupergen.com` |
-| `timeout`        | `number` (ms)            | `60000`                                                         |
-| `maxRetries`     | `number`                 | `2`                                                             |
-| `defaultHeaders` | `Record<string, string>` | `{}`                                                            |
-| `fetch`          | `typeof fetch`           | `globalThis.fetch`                                              |
+| Option           | Type                     | Default                                                           |
+| ---------------- | ------------------------ | ----------------------------------------------------------------- |
+| `apiKey`         | `string`                 | `process.env.LSUPERGEN_API_KEY`                                   |
+| `baseURL`        | `string`                 | `process.env.LSUPERGEN_BASE_URL` or `https://agents-sdk.space/v1` |
+| `timeout`        | `number` (ms)            | `60000`                                                           |
+| `maxRetries`     | `number`                 | `2`                                                               |
+| `defaultHeaders` | `Record<string, string>` | `{}`                                                              |
+| `fetch`          | `typeof fetch`           | `globalThis.fetch`                                                |
 
 `timeout`, `maxRetries`, `headers` and `signal` can also be set per request:
 
