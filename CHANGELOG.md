@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Initial release: `Lsupagen` client with `get`/`post`/`put`/`patch`/`delete`.
+- Initial release: `Lsupergen` client with `get`/`post`/`put`/`patch`/`delete`.
 - Automatic retries with exponential backoff (honours `Retry-After`).
 - Per-request timeouts and `AbortSignal` support.
-- Typed errors: `LsupagenError`, `APIError`, `TimeoutError`, `ConnectionError`.
+- Typed errors: `LsupergenError`, `APIError`, `TimeoutError`, `ConnectionError`.
 - Dual ESM + CommonJS build with TypeScript declarations.

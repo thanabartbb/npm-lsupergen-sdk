@@ -1,6 +1,13 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it, vi } from 'vitest';
-import { APIError, ConnectionError, Lsupagen, LsupagenError, TimeoutError, VERSION } from '../src';
+import {
+  APIError,
+  ConnectionError,
+  Lsupergen,
+  LsupergenError,
+  TimeoutError,
+  VERSION,
+} from '../src';
 
 function jsonResponse(body: unknown, status = 200, headers: Record<string, string> = {}) {
   return new Response(JSON.stringify(body), {
@@ -10,7 +17,7 @@ function jsonResponse(body: unknown, status = 200, headers: Record<string, strin
 }
 
 function createClient(fetchMock: typeof fetch, options = {}) {
-  return new Lsupagen({
+  return new Lsupergen({
     apiKey: 'test-key',
     baseURL: 'https://example.test/v1/',
     fetch: fetchMock,
@@ -18,16 +25,16 @@ function createClient(fetchMock: typeof fetch, options = {}) {
   });
 }
 
-describe('Lsupagen', () => {
+describe('Lsupergen', () => {
   it('throws when no API key is available', () => {
-    vi.stubEnv('LSUPAGEN_API_KEY', '');
-    expect(() => new Lsupagen()).toThrow(LsupagenError);
+    vi.stubEnv('LSUPERGEN_API_KEY', '');
+    expect(() => new Lsupergen()).toThrow(LsupergenError);
     vi.unstubAllEnvs();
   });
 
   it('reads the API key from the environment', () => {
-    vi.stubEnv('LSUPAGEN_API_KEY', 'env-key');
-    expect(new Lsupagen().apiKey).toBe('env-key');
+    vi.stubEnv('LSUPERGEN_API_KEY', 'env-key');
+    expect(new Lsupergen().apiKey).toBe('env-key');
     vi.unstubAllEnvs();
   });
 
@@ -48,7 +55,7 @@ describe('Lsupagen', () => {
     const headers = init.headers as Record<string, string>;
     expect(headers.Authorization).toBe('Bearer test-key');
     expect(headers['Content-Type']).toBe('application/json');
-    expect(headers['User-Agent']).toBe(`lsupagen-sdk/${VERSION}`);
+    expect(headers['User-Agent']).toBe(`lsupergen-sdk/${VERSION}`);
   });
 
   it('returns undefined for 204 responses', async () => {

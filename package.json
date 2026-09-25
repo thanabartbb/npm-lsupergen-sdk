@@ -1,9 +1,9 @@
 {
-  "name": "lsupagen-sdk",
+  "name": "lsupergen-sdk",
   "version": "0.1.0",
-  "description": "Official TypeScript/JavaScript SDK for the Lsupagen API",
+  "description": "Official TypeScript/JavaScript SDK for the Lsupergen API",
   "keywords": [
-    "lsupagen",
+    "lsupergen",
     "sdk",
     "api",
     "client",

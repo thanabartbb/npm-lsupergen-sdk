@@ -1,8 +1,8 @@
-import { APIError, ConnectionError, LsupagenError, TimeoutError } from './errors.js';
+import { APIError, ConnectionError, LsupergenError, TimeoutError } from './errors.js';
 import type { ClientOptions, HttpMethod, QueryValue, RequestOptions } from './types.js';
 import { VERSION } from './version.js';
 
-const DEFAULT_BASE_URL = 'https://api.lsupagen.com';
+const DEFAULT_BASE_URL = 'https://api.lsupergen.com';
 const DEFAULT_TIMEOUT = 60_000;
 const DEFAULT_MAX_RETRIES = 2;
 
@@ -18,7 +18,7 @@ function shouldRetry(status: number): boolean {
   return status === 408 || status === 409 || status === 429 || status >= 500;
 }
 
-export class Lsupagen {
+export class Lsupergen {
   readonly apiKey: string;
   readonly baseURL: string;
   readonly timeout: number;
@@ -28,14 +28,14 @@ export class Lsupagen {
   private readonly fetchImpl: typeof fetch;
 
   constructor(options: ClientOptions = {}) {
-    const apiKey = options.apiKey ?? readEnv('LSUPAGEN_API_KEY');
+    const apiKey = options.apiKey ?? readEnv('LSUPERGEN_API_KEY');
     if (!apiKey) {
-      throw new LsupagenError(
-        'Missing API key. Pass `apiKey` to the client or set the LSUPAGEN_API_KEY environment variable.',
+      throw new LsupergenError(
+        'Missing API key. Pass `apiKey` to the client or set the LSUPERGEN_API_KEY environment variable.',
       );
     }
     this.apiKey = apiKey;
-    this.baseURL = (options.baseURL ?? readEnv('LSUPAGEN_BASE_URL') ?? DEFAULT_BASE_URL).replace(
+    this.baseURL = (options.baseURL ?? readEnv('LSUPERGEN_BASE_URL') ?? DEFAULT_BASE_URL).replace(
       /\/+$/,
       '',
     );
@@ -44,7 +44,7 @@ export class Lsupagen {
     this.defaultHeaders = options.defaultHeaders ?? {};
     this.fetchImpl = options.fetch ?? globalThis.fetch;
     if (!this.fetchImpl) {
-      throw new LsupagenError('No `fetch` implementation found. Use Node.js 18+ or pass `fetch`.');
+      throw new LsupergenError('No `fetch` implementation found. Use Node.js 18+ or pass `fetch`.');
     }
   }
 
@@ -80,7 +80,7 @@ export class Lsupagen {
     const headers: Record<string, string> = {
       Accept: 'application/json',
       Authorization: `Bearer ${this.apiKey}`,
-      'User-Agent': `lsupagen-sdk/${VERSION}`,
+      'User-Agent': `lsupergen-sdk/${VERSION}`,
       ...this.defaultHeaders,
       ...options.headers,
     };

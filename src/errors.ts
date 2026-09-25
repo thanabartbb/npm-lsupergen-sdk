@@ -1,13 +1,13 @@
 /** Base class for every error thrown by the SDK. */
-export class LsupagenError extends Error {
+export class LsupergenError extends Error {
   constructor(message: string, options?: { cause?: unknown }) {
     super(message, options);
-    this.name = 'LsupagenError';
+    this.name = 'LsupergenError';
   }
 }
 
 /** The API responded with a non-2xx status code. */
-export class APIError extends LsupagenError {
+export class APIError extends LsupergenError {
   readonly status: number;
   readonly body: unknown;
   readonly headers: Headers;
@@ -22,7 +22,7 @@ export class APIError extends LsupagenError {
 }
 
 /** The request did not complete within the configured timeout. */
-export class TimeoutError extends LsupagenError {
+export class TimeoutError extends LsupergenError {
   constructor(timeoutMs: number) {
     super(`Request timed out after ${timeoutMs}ms`);
     this.name = 'TimeoutError';
@@ -30,7 +30,7 @@ export class TimeoutError extends LsupagenError {
 }
 
 /** The request could not reach the server (DNS, connection reset, etc.). */
-export class ConnectionError extends LsupagenError {
+export class ConnectionError extends LsupergenError {
   constructor(options?: { cause?: unknown }) {
     super('Connection error', options);
     this.name = 'ConnectionError';

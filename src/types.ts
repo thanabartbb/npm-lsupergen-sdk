@@ -3,9 +3,9 @@ export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 export type QueryValue = string | number | boolean | null | undefined;
 
 export interface ClientOptions {
-  /** API key. Defaults to `process.env.LSUPAGEN_API_KEY`. */
+  /** API key. Defaults to `process.env.LSUPERGEN_API_KEY`. */
   apiKey?: string;
-  /** Base URL of the API. Defaults to `process.env.LSUPAGEN_BASE_URL` or `https://api.lsupagen.com`. */
+  /** Base URL of the API. Defaults to `process.env.LSUPERGEN_BASE_URL` or `https://api.lsupergen.com`. */
   baseURL?: string;
   /** Per-request timeout in milliseconds. Default: 60000. */
   timeout?: number;

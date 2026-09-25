@@ -43,7 +43,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Load CJS build
         run: |
-          node -e "const { Lsupagen } = require('./dist/index.cjs'); new Lsupagen({ apiKey: 'x' });"
+          node -e "const { Lsupergen } = require('./dist/index.cjs'); new Lsupergen({ apiKey: 'x' });"
       - name: Load ESM build
         run: |
-          node --input-type=module -e "import { Lsupagen } from './dist/index.js'; new Lsupagen({ apiKey: 'x' });"
+          node --input-type=module -e "import { Lsupergen } from './dist/index.js'; new Lsupergen({ apiKey: 'x' });"
